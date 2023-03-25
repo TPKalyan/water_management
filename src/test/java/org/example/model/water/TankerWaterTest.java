@@ -28,7 +28,7 @@ public class TankerWaterTest {
 
     public static Stream<Arguments> getSlabs() {
         return Stream.of(
-                Arguments.of("First slab", 300, BigDecimal.valueOf(300)),
+                Arguments.of("First slab", 300, BigDecimal.valueOf(600)),
                 Arguments.of("Second slab", 721, BigDecimal.valueOf(2163)),
                 Arguments.of("Third slab", 1895, BigDecimal.valueOf(9475)),
                 Arguments.of("Fourth slab", 3054, BigDecimal.valueOf(24432))

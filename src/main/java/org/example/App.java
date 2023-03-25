@@ -1,11 +1,16 @@
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import org.example.utils.FileUtils;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+import java.util.List;
+
+public class App {
+
+    public static void main(String[] args)  {
+        String filePath = args[0];
+
+        List<String> commands = FileUtils.readFiles();
+
+//        commands.forEach(s -> );
     }
 }

@@ -1,10 +1,7 @@
 package org.example.model.Apartment;
 
-import org.example.model.Apartment.TwoBHK;
 import org.example.water.BoreWellWater;
 import org.example.water.CorporationWater;
-import org.example.water.TankerWater;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -15,23 +12,24 @@ class TwoBHKTest {
 
     private TwoBHK twoBHK;
 
-    @BeforeEach
-    void setUp() {
+    @Test
+    void shouldAllotCorporationWaterAndBoreWater() {
         twoBHK = new TwoBHK();
 
         twoBHK.allotWater(CorporationWater.of(270));
         twoBHK.allotWater(BoreWellWater.of(630));
-        twoBHK.allotWater(TankerWater.of(600));
-        twoBHK.allotWater(TankerWater.of(900));
+
+        assertThat(twoBHK.getTotalWaterUsed()).isEqualTo(900);
+        assertThat(twoBHK.getBillPerMonth()).isEqualTo(BigDecimal.valueOf(1215.0));
     }
 
     @Test
-    void shouldCalculateBill() {
-        assertThat(twoBHK.getBillPerMonth()).isEqualTo(BigDecimal.valueOf(5715.0));
-    }
+    void shouldAllotTankWaterWhenGuestsAreAdded() {
+        twoBHK = new TwoBHK();
 
-    @Test
-    void shouldGetTotalWaterUsed() {
-        assertThat(twoBHK.getTotalWaterUsed()).isEqualTo(2400);
+        twoBHK.addGuest(5);
+
+        assertThat(twoBHK.getTotalWaterUsed()).isEqualTo(1500);
+        assertThat(twoBHK.getBillPerMonth()).isEqualTo(BigDecimal.valueOf(4500));
     }
 }
