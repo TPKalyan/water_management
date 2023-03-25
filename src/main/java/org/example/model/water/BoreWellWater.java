@@ -1,10 +1,13 @@
-package org.example.water;
+package org.example.model.water;
+
+import lombok.Value;
 
 import java.math.BigDecimal;
 
+@Value
 public class BoreWellWater implements Water {
     private static final BigDecimal COST_PER_LITER = BigDecimal.valueOf(1.5);
-    private final Integer quantity;
+    Integer quantity;
 
     public BoreWellWater(Integer quantity) {
         this.quantity = quantity;

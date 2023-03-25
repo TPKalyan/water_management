@@ -4,7 +4,11 @@ import java.util.List;
 
 public class FileUtils {
 
-    public static List<String> readFiles() {
+    public static String readFile(String filePath) {
+        return null;
+    }
+
+    public static List<Command> parse(String commandsString) {
         return null;
     }
 }

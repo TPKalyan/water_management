@@ -1,8 +1,6 @@
-package org.example.water;
+package org.example.model.water;
 
 import java.math.BigDecimal;
-
-import static java.math.BigDecimal.ONE;
 
 public class TankerWater implements Water {
     private final Integer quantity;

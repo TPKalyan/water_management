@@ -1,7 +1,7 @@
-package org.example.model.Apartment;
+package org.example.model.apartment;
 
-import org.example.water.BoreWellWater;
-import org.example.water.CorporationWater;
+import org.example.model.water.BoreWellWater;
+import org.example.model.water.CorporationWater;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

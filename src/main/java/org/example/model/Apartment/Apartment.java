@@ -1,7 +1,8 @@
-package org.example.model.Apartment;
+package org.example.model.apartment;
 
-import org.example.water.TankerWater;
-import org.example.water.Water;
+
+import org.example.model.water.TankerWater;
+import org.example.model.water.Water;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public abstract class Apartment {
         allottedWater = new ArrayList<>();
     }
 
+    public abstract int getWaterNeededPerMonth();
 
     public void addGuest(int numberOfGuests) {
         int waterNeededByGuestsPerMonth = numberOfGuests * DAYS_IN_MONTH * WATER_NEEDED_PER_PERSON_PER_DAY;

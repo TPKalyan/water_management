@@ -1,4 +1,4 @@
-package org.example.water;
+package org.example.model.water;
 
 import java.math.BigDecimal;
 
