@@ -14,19 +14,21 @@ import static org.example.utils.FileUtils.readFile;
 public class App {
 
     private static Apartment apartment;
-    private static WaterManager manager = new WaterManager();
+    private static final WaterManager manager = new WaterManager();
 
     public static void main(String[] args)  {
         String filePath = args[0];
 
-        List<Command> commands = FileUtils.parse(readFile(filePath));
+        String test = "ALLOT_WATER 3 2:1\nADD_GUESTS 4\nADD_GUESTS 1\nBILL";
+
+        List<Command> commands = FileUtils.parse(test);
         commands.forEach(command -> {
             switch (command.getAction()) {
                 case ALLOT_WATER:
                     apartment = createApartmentAndAllotWater(command);
                     break;
                 case ADD_GUESTS:
-                    allotGuests(apartment, command.getGuestSize());
+                    allotGuests(apartment, command.getNumberOfGuests());
                     break;
                 case BILL:
                     System.out.format("%s %s", apartment.getTotalWaterUsed(), apartment.getBillPerMonth());
@@ -43,9 +45,7 @@ public class App {
 
     private static Apartment createApartmentAndAllotWater(Command command) {
         Apartment apartment = isTwoBHK(command.getApartmentSize()) ? new TwoBHK() : new ThreeBHK();
-        manager.allotWater(apartment, command.getCorporationWaterRatio(), command.getBoreWaterRatio());
-
-        return apartment;
+        return manager.allotWater(apartment, command.getCorporationWaterRatio(), command.getBoreWaterRatio());
     }
 
     private static boolean isTwoBHK(Integer apartmentSize) {
