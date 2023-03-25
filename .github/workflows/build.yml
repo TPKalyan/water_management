@@ -13,5 +13,5 @@ jobs:
         with:
           path: ${{ github.workspace }}/water_management
       - name: Run all tests
-        run: ./run.sh test
+        run: ./gradlew clean test
         working-directory: ${{ github.workspace }}/water_management
