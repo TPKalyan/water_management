@@ -24,10 +24,13 @@ public class App {
             switch (command.getAction()) {
                 case ALLOT_WATER:
                     apartment = createApartmentAndAllotWater(command);
+                    break;
                 case ADD_GUESTS:
                     allotGuests(apartment, command.getGuestSize());
+                    break;
                 case BILL:
                     System.out.format("%s %s", apartment.getTotalWaterUsed(), apartment.getBillPerMonth());
+                    break;
                 default:
                     throw new RuntimeException("Invalid command");
             }
