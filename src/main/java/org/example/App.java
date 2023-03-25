@@ -19,16 +19,14 @@ public class App {
     public static void main(String[] args)  {
         String filePath = args[0];
 
-        String test = "ALLOT_WATER 3 2:1\nADD_GUESTS 4\nADD_GUESTS 1\nBILL";
-
-        List<Command> commands = FileUtils.parse(test);
+        List<Command> commands = FileUtils.parse(readFile(filePath));
         commands.forEach(command -> {
             switch (command.getAction()) {
                 case ALLOT_WATER:
                     apartment = createApartmentAndAllotWater(command);
                     break;
                 case ADD_GUESTS:
-                    allotGuests(apartment, command.getNumberOfGuests());
+                    addGuests(apartment, command.getNumberOfGuests());
                     break;
                 case BILL:
                     System.out.format("%s %s", apartment.getTotalWaterUsed(), apartment.getBillPerMonth());
@@ -39,7 +37,7 @@ public class App {
         });
     }
 
-    private static void allotGuests(Apartment apartment, Integer numberOfGuests) {
+    private static void addGuests(Apartment apartment, Integer numberOfGuests) {
         manager.allotTankerWater(apartment, numberOfGuests);
     }
 
