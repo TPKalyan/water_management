@@ -1,6 +1,6 @@
-package model.water;
+package org.example.model.water;
 
-import model.water.CorporationWater;
+import org.example.water.CorporationWater;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

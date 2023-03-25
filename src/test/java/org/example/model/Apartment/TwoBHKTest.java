@@ -1,8 +1,9 @@
-package model.Apartment;
+package org.example.model.Apartment;
 
-import model.water.BoreWellWater;
-import model.water.CorporationWater;
-import model.water.TankerWater;
+import org.example.model.Apartment.TwoBHK;
+import org.example.water.BoreWellWater;
+import org.example.water.CorporationWater;
+import org.example.water.TankerWater;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

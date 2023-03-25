@@ -1,72 +1,68 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'jacoco'
+}
 
-sourceCompatibility = 1.8 // java 8
+group = 'com.example'
+version = '1.0'
+sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories {
-  mavenCentral()
+jacoco { //Please do not change this
+    toolVersion = "0.8.4"
+    reportsDir = file("$buildDir/jacoco")
 }
 
+jacocoTestReport { //Please do not change this
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled false
+        xml.destination file("./jacoco.xml")
+    }
+}
+
+jar {
+    archiveBaseName = 'geektrust' //Please do not change this final artifact name
+    version =  null               //Please do not change this final artifact version
+    manifest {
+        attributes 'Main-Class' : 'com.example.App' //Change this to the main class of your program which will be executed
+    }
+    // To create a single jar with all dependencies.
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+}
+
+test { ///Please do not change this
+    useJUnitPlatform()
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED", "STANDARD_ERROR"
+    }
+    finalizedBy jacocoTestReport // report is always generated after tests run
+    afterSuite { desc, result ->
+        if (!desc.parent)
+            println("${result.resultType} " +
+                    "(${result.testCount} tests, " +
+                    "${result.successfulTestCount} successes, " +
+                    "${result.failedTestCount} failures, " +
+                    "${result.skippedTestCount} skipped)")
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+//Add your dependencies here
 dependencies {
     // Use JUnit test framework.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
     testImplementation 'org.assertj:assertj-core:3.24.2'
-
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
-    testImplementation(platform("org.junit:junit-bom:5.9.2"))
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
-        because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions")
-    }
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
-}
-
-test {
-    useJUnitPlatform()
-}
-
-wrapper {
-    gradleVersion = "7.3.3"
-    distributionType = Wrapper.DistributionType.ALL
-}
-
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
-tasks.withType(Test) {
-    testLogging {
-        // set options for log level LIFECYCLE
-        events TestLogEvent.FAILED,
-                TestLogEvent.PASSED,
-                TestLogEvent.SKIPPED,
-                TestLogEvent.STANDARD_OUT
-        exceptionFormat TestExceptionFormat.FULL
-        showExceptions true
-        showCauses true
-        showStackTraces true
-
-        // set options for log level DEBUG and INFO
-        debug {
-            events TestLogEvent.STARTED,
-                    TestLogEvent.FAILED,
-                    TestLogEvent.PASSED,
-                    TestLogEvent.SKIPPED,
-                    TestLogEvent.STANDARD_ERROR,
-                    TestLogEvent.STANDARD_OUT
-            exceptionFormat TestExceptionFormat.FULL
-        }
-        info.events = debug.events
-        info.exceptionFormat = debug.exceptionFormat
-
-        afterSuite { desc, result ->
-            if (!desc.parent) { // will match the outermost suite
-                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
-                def startItem = '|  ', endItem = '  |'
-                def repeatLength = startItem.length() + output.length() + endItem.length()
-                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
-            }
-        }
-    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 }

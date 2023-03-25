@@ -1,6 +1,6 @@
-package model.Apartment;
+package org.example.model.Apartment;
 
-import model.water.Water;
+import org.example.water.Water;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
