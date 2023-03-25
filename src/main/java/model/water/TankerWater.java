@@ -16,6 +16,11 @@ public class TankerWater implements Water {
         return getCostPerLiter().multiply(BigDecimal.valueOf(quantity));
     }
 
+    @Override
+    public Integer getQuantity() {
+        return quantity;
+    }
+
     private BigDecimal getCostPerLiter() {
         if (this.quantity <= 500) return ONE;
         if (this.quantity <= 1500) return BigDecimal.valueOf(3);

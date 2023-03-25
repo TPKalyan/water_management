@@ -16,4 +16,10 @@ class BoreWellWaterTest {
 
         assertThat(BoreWellWater.of(waterUsedInLiters).totalCost()).isEqualTo(expectedCost);
     }
+
+    @Test
+    void shouldGetTotalWaterInLiters() {
+        int waterUsedInLiters = 300;
+        assertThat(BoreWellWater.of(waterUsedInLiters).getQuantity()).isEqualTo(waterUsedInLiters);
+    }
 }

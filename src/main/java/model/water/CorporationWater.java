@@ -15,6 +15,11 @@ public class CorporationWater implements Water {
         return COST_PER_LITER.multiply(BigDecimal.valueOf(quantity));
     }
 
+    @Override
+    public Integer getQuantity() {
+        return quantity;
+    }
+
     public static Water of(Integer quantity) {
         return new CorporationWater(quantity);
     }
