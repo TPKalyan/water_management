@@ -1,9 +1,12 @@
 package org.example.model.water;
 
+import lombok.Value;
+
 import java.math.BigDecimal;
 
+@Value
 public class TankerWater implements Water {
-    private final Integer quantity;
+    Integer quantity;
 
     public TankerWater(Integer quantity) {
         this.quantity = quantity;
@@ -28,5 +31,9 @@ public class TankerWater implements Water {
 
     public static Water of(Integer quantity) {
         return new TankerWater(quantity);
+    }
+
+    public Water add(TankerWater water) {
+        return TankerWater.of(quantity + water.getQuantity());
     }
 }

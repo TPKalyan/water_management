@@ -24,6 +24,14 @@ public class TankerWaterTest {
         assertThat(TankerWater.of(quantity).getQuantity()).isEqualTo(quantity);
     }
 
+    @Test
+    void shouldAddQuantityToTankerWater() {
+        TankerWater initialTankerWater = new TankerWater(20);
+        TankerWater additionalTankerWater = new TankerWater(30);
+
+        assertThat(initialTankerWater.add(additionalTankerWater).getQuantity()).isEqualTo(50);
+    }
+
     public static Stream<Arguments> getSlabs() {
         return Stream.of(
                 Arguments.of("First slab", 300, BigDecimal.valueOf(600)),

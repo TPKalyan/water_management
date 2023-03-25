@@ -25,13 +25,17 @@ public class App {
                 case ALLOT_WATER:
                     apartment = createApartmentAndAllotWater(command);
                 case ADD_GUESTS:
-                    apartment.addGuest(command.getGuestSize());
+                    allotGuests(apartment, command.getGuestSize());
                 case BILL:
                     System.out.format("%s %s", apartment.getTotalWaterUsed(), apartment.getBillPerMonth());
                 default:
                     throw new RuntimeException("Invalid command");
             }
         });
+    }
+
+    private static void allotGuests(Apartment apartment, Integer numberOfGuests) {
+        manager.allotTankerWater(apartment, numberOfGuests);
     }
 
     private static Apartment createApartmentAndAllotWater(Command command) {

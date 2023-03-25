@@ -3,6 +3,7 @@ package org.example.manager;
 import org.example.model.apartment.Apartment;
 import org.example.model.water.BoreWellWater;
 import org.example.model.water.CorporationWater;
+import org.example.model.water.TankerWater;
 import org.example.model.water.Water;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,12 +27,20 @@ class WaterManagerTest {
     @Test
     void shouldAllotWaterToApartmentInGivenRatio() {
         Apartment apartment = mock(Apartment.class);
-        doNothing().when(apartment).allotWater(any(Water.class));
         when(apartment.getWaterNeededPerMonth()).thenReturn(900);
 
         waterManager.allotWater(apartment, 2, 5);
 
-        verify(apartment).allotWater(CorporationWater.of(257));
-        verify(apartment).allotWater(BoreWellWater.of(643));
+        verify(apartment).allotCorporationWater(CorporationWater.of(257));
+        verify(apartment).allotBoreWellWater(BoreWellWater.of(643));
+    }
+
+    @Test
+    void shouldAllotTankerWaterToApartment() {
+        Apartment apartment = mock(Apartment.class);
+
+        waterManager.allotTankerWater(apartment, 2);
+
+        verify(apartment).allotTankerWater(TankerWater.of(600));
     }
 }
