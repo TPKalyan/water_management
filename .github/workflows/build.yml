@@ -1,0 +1,17 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout local repository
+        uses: actions/checkout@v2
+        with:
+          path: ${{ github.workspace }}/water_management
+      - name: Run all tests
+        run: ./run.sh test
+        working-directory: ${{ github.workspace }}/water_management
