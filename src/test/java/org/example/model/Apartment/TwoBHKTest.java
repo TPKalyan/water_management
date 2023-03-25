@@ -27,7 +27,7 @@ class TwoBHKTest {
 
     @Test
     void shouldCalculateBill() {
-        assertThat(twoBHK.getBillPerMonth()).isEqualTo(BigDecimal.valueOf(5215.0));
+        assertThat(twoBHK.getBillPerMonth()).isEqualTo(BigDecimal.valueOf(5715.0));
     }
 
     @Test
