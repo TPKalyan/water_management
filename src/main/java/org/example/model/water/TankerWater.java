@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Value
 public class TankerWater implements Water {
-    Integer quantity;
+    private final Integer quantity;
 
     public TankerWater(Integer quantity) {
         this.quantity = quantity;
@@ -31,9 +31,5 @@ public class TankerWater implements Water {
 
     public static Water of(Integer quantity) {
         return new TankerWater(quantity);
-    }
-
-    public Water add(TankerWater water) {
-        return TankerWater.of(quantity + water.getQuantity());
     }
 }

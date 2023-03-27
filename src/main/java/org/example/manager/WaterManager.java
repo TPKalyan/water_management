@@ -12,15 +12,15 @@ public class WaterManager {
     public Apartment allotWater(Apartment apartment, Integer corporationWaterRatio, Integer boreWaterRatio) {
         float ratioPortion = ((float) apartment.getWaterNeededPerMonth()) / (corporationWaterRatio + boreWaterRatio);
 
-        apartment.allotCorporationWater(CorporationWater.of(Math.round(ratioPortion * corporationWaterRatio)));
-        apartment.allotBoreWellWater(BoreWellWater.of(Math.round(ratioPortion * boreWaterRatio)));
+        apartment.allotWater(CorporationWater.of(Math.round(ratioPortion * corporationWaterRatio)));
+        apartment.allotWater(BoreWellWater.of(Math.round(ratioPortion * boreWaterRatio)));
 
         return apartment;
     }
 
     public Apartment allotTankerWater(Apartment apartment, Integer numberOfGuests) {
         Water tankerWater = TankerWater.of(calculateWaterNeededPerMonthFor(numberOfGuests));
-        apartment.allotTankerWater(tankerWater);
+        apartment.allotWater(tankerWater);
         return apartment;
     }
 }
